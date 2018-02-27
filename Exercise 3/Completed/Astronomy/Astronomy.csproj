@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.1</TargetFramework>
+    <AssemblyName>Astronomy</AssemblyName>
+    <RootNamespace>Astronomy</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="System.Net.Http" Version="4.3.3" />
+    <PackageReference Include="System.ValueTuple" Version="4.4.0" />
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Pages\PersonalizePage.xaml.cs">
+      <DependentUpon>PersonalizePage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+ 
+</Project>
