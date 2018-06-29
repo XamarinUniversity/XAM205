@@ -8,6 +8,8 @@ namespace Astronomy.Pages
         {
             InitializeComponent();
 
+            NavigationPage.SetBackButtonTitle(this, "Back");
+
             btnEarth.Clicked += (s, e) => Navigation.PushAsync(new AstronomicalBodyPage(SolarSystemData.Earth));
             btnMoon.Clicked += (s, e) => Navigation.PushAsync(new AstronomicalBodyPage(SolarSystemData.Moon));
             btnSun.Clicked += (s, e) => Navigation.PushAsync(new AstronomicalBodyPage(SolarSystemData.Sun));

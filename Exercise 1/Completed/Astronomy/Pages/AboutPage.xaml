@@ -6,9 +6,8 @@
 
     <StackLayout Padding="10" Spacing="5">
         <Label Text="Version 1.0.0" />
-        <Label Text="Location Data provided by: https://freegeoip.net/" />
         <Label Text="Sunrise/Sunset data provided by: https://sunrise-sunset.org/api" />
         <Label Text="Icons from Font Awesome" />
     </StackLayout>
-    
+
 </ContentPage>
