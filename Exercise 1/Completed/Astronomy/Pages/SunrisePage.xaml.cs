@@ -6,9 +6,11 @@ namespace Astronomy.Pages
 {
     public partial class SunrisePage : ContentPage
     {
+        ILatLongService LatLongService { get; set; }
         public SunrisePage ()
         {
             InitializeComponent ();
+            LatLongService = new FakeLatLongService();
         }
 
         protected override async void OnAppearing()
@@ -20,7 +22,7 @@ namespace Astronomy.Pages
 
         async Task InitializeUI ()
         {
-            var latLongData = await new LatLongService().GetLatLong();
+            var latLongData = await LatLongService.GetLatLong();
             var sunData = await new SunriseService().GetSunriseSunsetTimes(latLongData.Latitude, latLongData.Longitude);
 
             var riseTime = sunData.Sunrise.ToLocalTime();
