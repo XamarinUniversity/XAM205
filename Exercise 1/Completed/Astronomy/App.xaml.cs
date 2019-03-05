@@ -6,7 +6,7 @@ namespace Astronomy
 {
     public partial class App : Application
     {
-        public App ()
+        public App()
         {
             InitializeComponent();
 

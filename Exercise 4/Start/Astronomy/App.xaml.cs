@@ -4,13 +4,13 @@ using Xamarin.Forms.Xaml;
 [assembly:XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Astronomy
 {
-	public partial class App : Application
-	{
-		public App ()
-		{
-			InitializeComponent();
+    public partial class App : Application
+    {
+        public App()
+        {
+            InitializeComponent();
 
-			MainPage = new Astronomy.MainPage();
-		}
-	}
+            MainPage = new Astronomy.MainPage();
+        }
+    }
 }

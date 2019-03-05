@@ -16,7 +16,7 @@
     </ContentPage.Resources>
 
     <StackLayout Padding="10" Spacing="5">
-        
+
         <Label x:Name="lblWelcome" Text="Explore your solar system!" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" />
         <Label Text="🌎 🌕 ☀️" FontSize="Large" HorizontalOptions="Center" />
 
@@ -25,6 +25,6 @@
         <Button x:Name="btnSpaceInfo" Text="Astronomical Bodies" />
         <Button x:Name="btnAbout" Text="About Contoso Astronomy" />
         <Button x:Name="btnPersonalize" Text="Personalize" />
-        
+
     </StackLayout>
 </ContentPage>

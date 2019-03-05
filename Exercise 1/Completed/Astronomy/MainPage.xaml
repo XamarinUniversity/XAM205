@@ -16,7 +16,7 @@
     </ContentPage.Resources>
 
     <StackLayout Padding="10" Spacing="5">
-        
+
         <Label Text="Explore your solar system!" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" />
         <Label Text="🌎 🌕 ☀️" FontSize="Large" HorizontalOptions="Center" />
 

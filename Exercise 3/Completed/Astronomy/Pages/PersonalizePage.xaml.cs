@@ -3,10 +3,10 @@ using Xamarin.Forms;
 
 namespace Astronomy
 {
-	public partial class PersonalizePage : ContentPage
-	{
-		public PersonalizePage ()
-		{
+    public partial class PersonalizePage : ContentPage
+    {
+        public PersonalizePage ()
+        {
             InitializeComponent();
 
             btnSave.Clicked += BtnSaveClicked;
