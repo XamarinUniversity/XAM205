@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <title>Exercise 2: Customize the navigation bar (XAM205)</title>
+    <link rel="stylesheet" type="text/css" href="./res/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./res/styles/prettify.css" />
+    <link rel="stylesheet" type="text/css" href="./res/styles/styles.css">
+</head>
+
+<body>
+    <!-- Use the same title as the StartHere -->
+    <header>XAM205 Navigation patterns in Xamarin.Forms</header>
+
+    <section id="main">
+        <h2>Exercise 2: Customize the navigation bar (XAM205)</h2>
+<p>In this exercise you'll change the colors of the navigation bar and control the text displayed when navigating back to a previous page.</p>
+<p>This exercise is a continuation of the previous exercise, you may use your existing solution or open the completed solution provided for Exercise 1.</p>
+<figure class="figure">
+<img src="./images/ex2-complete.png" alt="Screenshot of the completed exercise." class="exercise portrait bordered" title="Completed exercise" />
+<figcaption class="figure-caption">Completed exercise</figcaption>
+</figure>
+<blockquote class="info-quote">To complete the exercise, you will need <a href="https://www.visualstudio.com/" target="_blank">Visual Studio for Windows or macOS</a> with the <a href="https://visualstudio.microsoft.com/xamarin/" target="_blank">Xamarin development tools</a> installed. You will also need either an emulator/simulator or a device to run the exercise on. Please see the <a href="https://docs.microsoft.com/xamarin/cross-platform/get-started/installation/" target="_blank">setup page</a> if you need help installing the Xamarin development environment.
+</blockquote>
+
+<hr>
+<h2>Open the starter solution</h2>
+<p>Open the starter solution from the <strong>Exercise 2</strong> &gt; <strong>Start</strong> folder in your copy of the cloned or downloaded <a href="https://github.com/XamarinUniversity/XAM205/">course materials</a> in either <strong>Visual Studio</strong> on Windows or <strong>Visual Studio for Mac</strong>.</p>
+
+<hr>
+<h2>Change the navigation bar color</h2>
+<ol>
+<li>Open <strong>App.xaml.cs</strong>.</li>
+<li>In the constructor, create a local variable named <strong>navPage</strong> and assign it to the instance of <code>NavigationPage</code>.</li>
+<li>Assign a <code>Color</code> to <code>navPage.BarBackgroundColor</code> to change the color of the navigation bar.</li>
+<li>Assign a <code>Color</code> to <code>navPage.BarTextColor</code> to change the color of the navigation bar text.</li>
+<li>Assign the <strong>navPage</strong> variable to the Page's <strong>MainPage</strong> property.</li>
+</ol>
+<pre class="prettyprint-collapse"><code>public App ()
+{
+   InitializeComponent();
+   var navPage = new NavigationPage(new Astronomy.MainPage());
+
+   navPage.BarBackgroundColor = Color.Black;
+   navPage.BarTextColor = Color.White;
+
+   MainPage = navPage;
+}
+</code></pre>
+
+
+<hr>
+<h2>Optimize the back button text</h2>
+<p>The back button text is auto-populated to the title of the previous page. You'll provide alternate text for the pages with longer titles.</p>
+<ol>
+<li>Open <strong>MainPage.xaml.cs</strong>.</li>
+<li>
+<p>In the constructor, after the call to <code>InitializeComponent</code>, call <code>NavigationPage.SetBackButtonTitle</code> passing in &quot;Menu&quot; for the back button text.</p>
+<pre class="prettyprint-collapse"><code>public MainPage()
+{
+   InitializeComponent();
+
+   NavigationPage.SetBackButtonTitle(this, &quot;Menu&quot;);
+   ...
+}
+</code></pre>
+
+</li>
+<li>Perform the same steps in <strong>AstronomicalBodies.xaml.cs</strong> - the completed solution sets the back button text to &quot;Back&quot;.</li>
+<li>Run the application and navigate between pages - notice the navigation bar colors have been updated and the back button text has been changed.</li>
+</ol>
+
+<hr>
+<h2>Exercise summary</h2>
+<p>In this exercise, you customized the colors and back button text of the navigation bar. This allows you to match style/theme preferences for your application and ensure the back button text is a reasonable length.</p>
+<p>You can view the completed solution in the <strong>Exercise 2</strong> &gt; <strong>Completed</strong> folder of your copy of the cloned or downloaded <a href="https://github.com/XamarinUniversity/XAM205/">course materials</a>.</p>
+
+
+        <div class="align-right">
+            <a href="../StartHere.html">Go Back</a>
+        </div>
+
+    </section>
+
+    <script src="./res/js/jquery.min.js"></script>
+    <script src="./res/js/jquery.imagemapster.min.js"></script>
+    <script src="./res/js/imagemap.js"></script>
+    <script src="./res/js/prettify.js"></script>
+    <script src="./res/js/script.js"></script>
+
+    <footer>Copyright (C) 2018 Xamarin Inc., Microsoft. All rights reserved.<br><a target="_blank" href="http://university.xamarin.com">Visit Xamarin University for more classes and content</a></footer>
+
+</body>
+</html>

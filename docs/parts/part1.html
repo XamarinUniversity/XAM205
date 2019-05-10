@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <title>Exercise 1: Navigate between pages using stack navigation (XAM205)</title>
+    <link rel="stylesheet" type="text/css" href="./res/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./res/styles/prettify.css" />
+    <link rel="stylesheet" type="text/css" href="./res/styles/styles.css">
+</head>
+
+<body>
+    <!-- Use the same title as the StartHere -->
+    <header>XAM205 Navigation patterns in Xamarin.Forms</header>
+
+    <section id="main">
+        <h2>Exercise 1: Navigate between pages using stack navigation (XAM205)</h2>
+<p>The goal of this exercise is to navigate forwards and backwards through pages of content in an existing Xamarin.Forms application using a <code>NavigationPage</code>.</p>
+<p>The provided Xamarin.Forms application contains several astronomy-themed pages that you will navigate to using a hierarchical navigation structure.</p>
+<ul>
+<li>Sunrise/Sunset times </li>
+<li>Moon phase calendar</li>
+<li>Astronomical body details</li>
+</ul>
+<figure class="figure">
+<img src="./images/ex1-complete.png" alt="Screenshot of the completed exercise." class="exercise" title="Completed exercise" />
+<figcaption class="figure-caption">Completed exercise</figcaption>
+</figure>
+<blockquote class="info-quote">To complete the exercise, you will need <a href="https://www.visualstudio.com/" target="_blank">Visual Studio for Windows or macOS</a> with the <a href="https://visualstudio.microsoft.com/xamarin/" target="_blank">Xamarin development tools</a> installed. You will also need either an emulator/simulator or a device to run the exercise on. Please see the <a href="https://docs.microsoft.com/xamarin/cross-platform/get-started/installation/" target="_blank">setup page</a> if you need help installing the Xamarin development environment.
+</blockquote>
+
+<hr>
+<h2>Open the starter solution</h2>
+<p>Open the starter solution from the <strong>Exercise 1 &gt; Start</strong> folder in your copy of the cloned or downloaded <a href="https://github.com/XamarinUniversity/XAM205/">course materials</a> in either <strong>Visual Studio</strong> on Windows or <strong>Visual Studio for Mac</strong>.</p>
+
+<hr>
+<h2>Add a NavigationPage</h2>
+<p>We'll use a <strong>NavigationPage</strong> to add stack navigation to the astronomy app. The <code>NavigationPage</code> will be the first page your app displays.</p>
+<ol>
+<li>Open <strong>App.xaml.cs</strong>.</li>
+<li>Find the <strong>App</strong> constructor and change the <code>MainPage</code> to a new instance of <code>NavigationPage</code>.</li>
+<li>Pass in an instance of <code>Astronomy.MainPage</code> to the navigation page constructor.</li>
+</ol>
+<pre class="prettyprint-collapse"><code>public App ()
+{
+    InitializeComponent();
+
+    MainPage = <mark>new NavigationPage(</mark>new Astronomy.MainPage()<mark>);</mark>
+}
+</code></pre>
+
+
+<hr>
+<h2>Add the navigation UI</h2>
+<p>Add the navigation UI</p>
+<ol>
+<li>Open <strong>MainPage.xaml</strong></li>
+<li>Add a new <code>Button</code> in the <code>StackLayout</code> below the <code>Label</code>s</li>
+<li>Name the button <strong>btnSunrise</strong></li>
+<li>Set the button text to <strong>Sunrise and Sunset</strong></li>
+<li>
+Add three more buttons:
+<ul>
+<li>Name: <strong>btnMoonPhase</strong>, Text: <strong>Moon Phase</strong></li>
+<li>Name: <strong>btnSpaceInfo</strong>, Text: <strong>Astronomical Bodies</strong></li>
+<li>Name: <strong>btnAbout</strong>, Text: <strong>About Contoso Astronomy</strong></li>
+</ul>
+</li>
+</ol>
+<pre class="prettyprint-collapse"><code>&lt;ContentPage ...&gt;
+    &lt;StackLayout&gt;
+        ...
+        &lt;Button x:Name=&quot;btnSunrise&quot; Text=&quot;Sunrise and Sunset&quot; /&gt;
+        &lt;Button x:Name=&quot;btnMoonPhase&quot; Text=&quot;Moon Phase&quot; /&gt;
+        &lt;Button x:Name=&quot;btnSpaceInfo&quot; Text=&quot;Astronomical Bodies&quot; /&gt;
+        &lt;Button x:Name=&quot;btnAbout&quot; Text=&quot;About Contoso Astronomy&quot; /&gt;
+    &lt;/StackLayout&gt;
+&lt;/ContentPage&gt;
+</code></pre>
+
+
+<hr>
+<h2>Perform stack navigation</h2>
+<p>You'll respond to your new buttons' <code>Clicked</code> events and perform navigation.</p>
+<ol>
+<li>Open <strong>MainPage.xaml.cs</strong>.</li>
+<li>
+Add the button <code>Clicked</code> event handlers in the page constructor for the four buttons you created in the previous step.
+<ul>
+<li>For <code>btnSunrise</code>, assign a <code>Navigation.PushAsync</code> call with a new <code>SunrisePage</code></li>
+<li>For <code>btnMoonPhase</code>, assign a <code>Navigation.PushAsync</code> call with a new <code>MoonPhasePage</code></li>
+<li>For <code>btnSpaceInfo</code>, assign a <code>Navigation.PushAsync</code> call with a new <code>AstronomicalBodiesPage</code></li>
+<li>For <code>btnAbout</code>, assign a <code>Navigation.PushAsync</code> call with a new <code>AboutPage</code></li>
+</ul>
+</li>
+<li>Optionally, inspect <strong>AstronomicalBodies</strong>, notice that it also performs stack navigation allowing you to navigate one level deeper in your content hierarchy.</li>
+<li>Run the application and navigate forwards and backwards through the application content.</li>
+</ol>
+<pre class="prettyprint-collapse"><code>public MainPage()
+{
+    InitializeComponent();
+
+    btnSunrise.Clicked += (s, e) =&gt; Navigation.PushAsync(new SunrisePage());
+    btnMoonPhase.Clicked += (s, e) =&gt; Navigation.PushAsync(new MoonPhasePage());
+    btnSpaceInfo.Clicked += (s, e) =&gt; Navigation.PushAsync(new AstronomicalBodiesPage());
+    btnAbout.Clicked += (s, e) =&gt; Navigation.PushAsync(new AboutPage());
+}
+</code></pre>
+
+
+<hr>
+<h2>Exercise summary</h2>
+<p>In this exercise, you added stack navigation to an existing Xamarin.Forms application using a NavigationPage. This is relatively simple to implement but a very powerful common navigation pattern that can be used in many applications that have hierarchical pages of content.</p>
+<p>You can view the completed solution in the <strong>Exercise 1</strong> &gt; <strong>Completed</strong> folder of your copy of the cloned or downloaded <a href="https://github.com/XamarinUniversity/XAM205/">course materials</a>.</p>
+
+
+        <div class="align-right">
+            <a href="../StartHere.html">Go Back</a>
+        </div>
+
+    </section>
+
+    <script src="./res/js/jquery.min.js"></script>
+    <script src="./res/js/jquery.imagemapster.min.js"></script>
+    <script src="./res/js/imagemap.js"></script>
+    <script src="./res/js/prettify.js"></script>
+    <script src="./res/js/script.js"></script>
+
+    <footer>Copyright (C) 2018 Xamarin Inc., Microsoft. All rights reserved.<br><a target="_blank" href="http://university.xamarin.com">Visit Xamarin University for more classes and content</a></footer>
+
+</body>
+</html>
