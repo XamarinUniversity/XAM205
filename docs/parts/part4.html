@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <title>Exercise 4: Navigate between pages using tab navigation (XAM205)</title>
+    <link rel="stylesheet" type="text/css" href="./res/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./res/styles/prettify.css" />
+    <link rel="stylesheet" type="text/css" href="./res/styles/styles.css">
+</head>
+
+<body>
+    <!-- Use the same title as the StartHere -->
+    <header>XAM205 Navigation patterns in Xamarin.Forms</header>
+
+    <section id="main">
+        <h2>Exercise 4: Navigate between pages using tab navigation (XAM205)</h2>
+<p>The goal of this exercise is to navigate between several pages of content using tab navigation.</p>
+<figure class="figure">
+<img src="./images/ex4-complete.png" alt="Screenshot of the completed exercise." style="max-width: 100%; border: 1px solid #000;" title="Completed exercise" />
+<figcaption class="figure-caption">Completed exercise</figcaption>
+</figure>
+<blockquote class="info-quote">To complete the exercise, you will need <a href="https://www.visualstudio.com/" target="_blank">Visual Studio for Windows or macOS</a> with the <a href="https://visualstudio.microsoft.com/xamarin/" target="_blank">Xamarin development tools</a> installed. You will also need either an emulator/simulator or a device to run the exercise on. Please see the <a href="https://docs.microsoft.com/xamarin/cross-platform/get-started/installation/" target="_blank">setup page</a> if you need help installing the Xamarin development environment.
+</blockquote>
+
+<hr>
+<h2>Open the starter solution</h2>
+<p>Open the starter project from the <strong>Exercise 4 &gt; Start</strong> folder in your copy of the cloned or downloaded <a href="https://github.com/XamarinUniversity/XAM205/">course materials</a> in either <strong>Visual Studio</strong> on Windows or <strong>Visual Studio for Mac</strong>.</p>
+
+<hr>
+<h2>Convert a ContentPage to a TabbedPage</h2>
+<p>You'll use a <strong>TabbedPage</strong> to switch between several pages. You can create a new <code>TabbedPage</code> manually but it's easier and less error-prone to convert an existing <code>ContentPage</code> to a <code>TabbedPage</code>.</p>
+<ol>
+<li>Open <strong>MainPage.xaml</strong>.</li>
+<li>
+<p>Change the root node from <code>ContentPage</code> to <code>TabbedPage</code>.</p>
+<pre class="prettyprint"><code>&lt;TabbedPage ...&gt;
+&lt;/TabbedPage&gt;
+</code></pre>
+
+</li>
+<li>
+Open <strong>MainPage.xaml.cs</strong>.
+</li>
+<li>Change the class' inherited type from <code>ContentPage</code> to <code>TabbedPage</code>.</li>
+<li>
+<p>In the constructor, add instances of <code>SunrisePage</code>, <code>MoonPhasePage</code> and <code>AboutPage</code> to the page's <code>Children</code> property.</p>
+<pre class="prettyprint"><code>public partial class MainPage : <mark>TabbedPage</mark>
+{
+    public MainPage()
+    {
+        InitializeComponent();
+
+        this.Children.Add(new SunrisePage());
+        this.Children.Add(new MoonPhasePage());
+        this.Children.Add(new AboutPage());
+    }
+}
+</code></pre>
+
+</li>
+</ol>
+
+<hr>
+<h2>Add icons for the tabs</h2>
+<p>If you're running the application on iOS or Android, you can display unique images on the tabs for each page</p>
+<ol>
+<li>Open the <strong>Assets</strong> folder in the cloned or downloaded materials for <strong>Exercise 4</strong>.</li>
+<li>Add the images in the <strong>Android</strong> folder to the appropriate drawable folders in the Android head project.</li>
+<li>Add the images in the <strong>iOS</strong> folder to the <strong>Resources</strong> folder in the iOS head project.</li>
+<li>Verify the new images have the correct build action: <strong>AndroidResource</strong> in the Android project and <strong>BundleResource</strong> in iOS.</li>
+</ol>
+
+<hr>
+<h2>Set icons for each page</h2>
+<p>You need to set the <code>Icon</code> property for each page that you want an icon displayed when shown within a <code>TabbbedPage</code>. This can be done in the <strong>.xaml</strong> or <strong>xaml.cs</strong> files.</p>
+<ol>
+<li>Open <strong>SunrisePage.xaml</strong>.</li>
+<li>In the <code>ContentPage</code> declaration, set the <code>Icon</code> property to &quot;sun.png&quot;.</li>
+<li>Open <strong>MoonPhasePage.xaml</strong>.</li>
+<li>In the <code>ContentPage</code> declaration, set the <code>Icon</code> property to &quot;moon.png&quot;.</li>
+<li>Open <strong>AboutPage.xaml</strong>.</li>
+<li>In the <code>ContentPage</code> declaration, set the <code>Icon</code> property to &quot;question.png&quot; (example shown below).</li>
+<li>
+<p>Run the application.</p>
+<pre class="prettyprint"><code>&lt;ContentPage ...
+    Title=&quot;About&quot;
+    Icon=&quot;question.png&quot;&gt;
+</code></pre>
+
+</li>
+</ol>
+
+<hr>
+<h2>Set safe areas for iOS</h2>
+<p>If you ran the application on an iOS device you may have noticed the pages overlap with the iOS status bar. This is especially noticeable on the iPhones with the top notch.</p>
+<p>You use <strong>iOS Safe Areas</strong> when running on <strong>iOS</strong> to correct this.</p>
+<ol>
+<li>Open <strong>SunrisePage.xaml</strong>.</li>
+<li>Add the code below to the <code>ContentPage</code> declaration.</li>
+</ol>
+<pre class="prettyprint"><code>&lt;ContentPage ...
+    xmlns:ios=&quot;clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core&quot;
+    ios:Page.UseSafeArea=&quot;true&quot;
+    ...&gt;
+</code></pre>
+
+<ol>
+<li>Repeat the steps above for <strong>MoonPhasePage.xaml</strong> and <strong>AboutPage.xaml</strong>.</li>
+<li>Run the application on an iOS simulator or device if available.</li>
+</ol>
+
+<hr>
+<h2>Exercise summary</h2>
+<p>In this exercise, you used tabs to navigate between several pages of content.</p>
+<p>You can view the completed solution in the <strong>Exercise 4</strong> &gt; <strong>Completed</strong> folder of your copy of the cloned or downloaded <a href="https://github.com/XamarinUniversity/XAM205/">course materials</a>.</p>
+
+
+        <div class="align-right">
+            <a href="../StartHere.html">Go Back</a>
+        </div>
+
+    </section>
+
+    <script src="./res/js/jquery.min.js"></script>
+    <script src="./res/js/jquery.imagemapster.min.js"></script>
+    <script src="./res/js/imagemap.js"></script>
+    <script src="./res/js/prettify.js"></script>
+    <script src="./res/js/script.js"></script>
+
+    <footer>Copyright (C) 2018 Xamarin Inc., Microsoft. All rights reserved.<br><a target="_blank" href="http://university.xamarin.com">Visit Xamarin University for more classes and content</a></footer>
+
+</body>
+</html>

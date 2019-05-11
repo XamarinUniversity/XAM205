@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+    <title>Exercise 3: Display a page modally (XAM205)</title>
+    <link rel="stylesheet" type="text/css" href="./res/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./res/styles/prettify.css" />
+    <link rel="stylesheet" type="text/css" href="./res/styles/styles.css">
+</head>
+
+<body>
+    <!-- Use the same title as the StartHere -->
+    <header>XAM205 Navigation patterns in Xamarin.Forms</header>
+
+    <section id="main">
+        <h2>Exercise 3: Display a page modally (XAM205)</h2>
+<p>In this exercise you'll request information from the user by displaying a modal page.</p>
+<p>This exercise is a continuation of the previous exercise, you may use your existing solution or open the completed solution provided for Exercise 2.</p>
+<figure class="figure">
+<img src="./images/ex3-complete.png" alt="Screenshot of the completed exercise." class="exercise bordered" title="Completed exercise" />
+<figcaption class="figure-caption">Completed exercise</figcaption>
+</figure>
+<blockquote class="info-quote">To complete the exercise, you will need <a href="https://www.visualstudio.com/" target="_blank">Visual Studio for Windows or macOS</a> with the <a href="https://visualstudio.microsoft.com/xamarin/" target="_blank">Xamarin development tools</a> installed. You will also need either an emulator/simulator or a device to run the exercise on. Please see the <a href="https://docs.microsoft.com/xamarin/cross-platform/get-started/installation/" target="_blank">setup page</a> if you need help installing the Xamarin development environment.
+</blockquote>
+
+<hr>
+<h2>Open the starter solution</h2>
+<p>Open the starter project from the <strong>Exercise 3 &gt; Start</strong> folder in your copy of the cloned or downloaded <a href="https://github.com/XamarinUniversity/XAM205/">course materials</a> in either <strong>Visual Studio</strong> on Windows or <strong>Visual Studio for Mac</strong>.</p>
+
+<hr>
+<h2>Add modal navigation UI</h2>
+<ol>
+<li>Open <strong>MainPage.xaml</strong>.</li>
+<li>Add a new button below the others with a name of <strong>btnPersonalize</strong> and text of <strong>Personalize</strong>.</li>
+<li>You'll also update the welcome label based on user choices - name the first label <strong>lblWelcome</strong> so that you can access it from the code-behind.</li>
+</ol>
+<pre class="prettyprint-collapse"><code>&lt;ContentPage ...&gt;
+    &lt;StackLayout&gt;
+        &lt;Label <mark>x:Name=&quot;lblWelcome&quot;</mark> Text=&quot;Explore your solar system!&quot; ... /&gt;
+        ...
+        <mark>&lt;Button x:Name=&quot;btnPersonalize&quot; Text=&quot;Personalize&quot; /&gt;</mark>
+    &lt;/StackLayout&gt;
+&lt;/ContentPage&gt;
+</code></pre>
+
+
+<hr>
+<h2>Add a new page</h2>
+<ol>
+<li>Add a new <strong>ContentPage</strong> named <strong>PersonalizePage</strong> (In Visual Studio for Mac, pick the <strong>Forms ContentPage Xaml</strong> template).</li>
+<li>Open <strong>PersonalizePage.xaml</strong>.</li>
+<li>
+<p>Replace the default content with the following xaml.</p>
+<pre class="prettyprint"><code>&lt;StackLayout Padding=&quot;10&quot;&gt;
+    &lt;Label Text=&quot;What is your name?&quot; /&gt;
+    &lt;Entry x:Name=&quot;entryName&quot; /&gt;
+
+    &lt;Label Text=&quot;Choose an icon:&quot; /&gt;
+
+    &lt;Picker x:Name=&quot;pickerIcon&quot;&gt;
+        &lt;Picker.Items&gt;
+            &lt;x:String&gt;👩‍🚀&lt;/x:String&gt;
+            &lt;x:String&gt;👨‍🚀&lt;/x:String&gt;
+            &lt;x:String&gt;👾&lt;/x:String&gt;
+            &lt;x:String&gt;☄️&lt;/x:String&gt;
+            &lt;x:String&gt;🌌&lt;/x:String&gt;
+            &lt;x:String&gt;🛰️&lt;/x:String&gt;
+            &lt;x:String&gt;🚀&lt;/x:String&gt;
+        &lt;/Picker.Items&gt;
+    &lt;/Picker&gt;
+
+    &lt;Button x:Name=&quot;btnSave&quot; Text=&quot;Save&quot; /&gt;
+    &lt;Button x:Name=&quot;btnCancel&quot; Text=&quot;Cancel&quot; /&gt;
+
+&lt;/StackLayout&gt;
+</code></pre>
+
+</li>
+<li>Open <strong>PersonalizePage.xaml.cs</strong>.</li>
+<li>
+<p>Replace the default class definition with the following code.</p>
+<pre class="prettyprint"><code>public partial class PersonalizePage : ContentPage
+{
+    public PersonalizePage ()
+    {
+        InitializeComponent();
+
+        btnSave.Clicked += BtnSaveClicked;
+        btnCancel.Clicked += BtnCancelClicked;
+    }
+
+    async void BtnCancelClicked(object sender, EventArgs e)
+    {
+
+    }
+
+    async void BtnSaveClicked(object sender, EventArgs e)
+    {
+
+    }
+}
+</code></pre>
+
+</li>
+</ol>
+
+<hr>
+<h2>Display a page modally</h2>
+<ol>
+<li>Open <strong>MainPage.xaml.cs</strong>.</li>
+<li>Add a <code>Clicked</code> event handler for the new <strong>btnPersonalize</strong>.</li>
+<li>In the event handler, call <code>Navigation.PushModalAsync</code> and pass in a new instance of <code>PersonalizePage</code>.</li>
+<li>Run the application and display the new personalization page.</li>
+</ol>
+<pre class="prettyprint-collapse"><code>public MainPage()
+{
+    ...
+    btnPersonalize.Clicked += async (s, e) =&gt; await Navigation.PushModalAsync(new PersonalizePage());
+}
+</code></pre>
+
+
+<hr>
+<h2>Dismiss a modal page</h2>
+<p>You'll respond to button taps on both the save and cancel buttons of the PersonalizePage and dismiss it. You'll also save the users choices if they tap <strong>Save</strong>.</p>
+<ol>
+<li>Open <strong>PersonalizePage.xaml.cs</strong>.</li>
+<li>Go to <code>BtnCancelClicked</code> and dismiss the page by calling <code>Navigation.PopModalAsync</code>.</li>
+<li>Go to <code>BtnSaveClicked</code>.</li>
+<li>Save the user's name set in the <code>Entry</code> <strong>entryName</strong> to <code>Application.Current.Properties[&quot;Name&quot;]</code>.</li>
+<li>Save the user's icon choice in the <code>Picker</code> <strong>pickerIcon</strong> to <code>Application.Current.Properties[&quot;Icon&quot;]</code> - the values in the picker are strings but will require a cast.</li>
+<li>Call and await <code>Application.Current.SavePropertiesAsync</code> to ensure the values are saved.</li>
+<li>
+<p>Dismiss the page by calling <code>Navigation.PopModalAsync</code>,</p>
+<pre class="prettyprint-collapse"><code>async void BtnSaveClicked(object sender, EventArgs e)
+{
+    Application.Current.Properties[&quot;Name&quot;] = entryName.Text;
+    Application.Current.Properties[&quot;Icon&quot;] = pickerIcon.SelectedItem as string;
+
+    await Application.Current.SavePropertiesAsync();
+
+    await this.Navigation.PopModalAsync();
+}
+</code></pre>
+
+</li>
+<li>Optionally, in the constructor, check <code>Application.Current.Properties</code> to see if it contains the <strong>Name</strong> and <strong>Icon</strong> keys and use them to initialize the entry and picker.</li>
+</ol>
+
+<hr>
+<h2>Update the UI based on user choices</h2>
+<ol>
+<li>Open <strong>MainPage.xaml.cs</strong>.</li>
+<li>Override <code>OnAppearing</code>.</li>
+<li>
+<p>Add the following code to load the user's preferences from <code>Application.Current.Properties</code> and display them in <strong>lblWelcome</strong>.</p>
+<pre class="prettyprint-collapse"><code>protected override void OnAppearing()
+{
+    base.OnAppearing();
+
+    string name = string.Empty;
+    string icon = string.Empty;
+
+    if (Application.Current.Properties.ContainsKey(&quot;Name&quot;))
+        name = Application.Current.Properties[&quot;Name&quot;] as string;
+
+    if (Application.Current.Properties.ContainsKey(&quot;Icon&quot;))
+        icon = Application.Current.Properties[&quot;Icon&quot;] as string;
+
+    lblWelcome.Text = $&quot;Welcome Captain {name} {icon} - let's explore!&quot;;
+}
+</code></pre>
+
+</li>
+<li>Run the application, launch the preferences page, enter you name, choose and icon and press save.</li>
+</ol>
+
+<hr>
+<h2>Exercise summary</h2>
+<p>In this exercise, you created and displayed a page modally. Modal pages are commonly used to ensure the user makes a selection and can give them more control over when selections are saved or ignored.</p>
+<p>You can view the completed solution in the <strong>Exercise 3</strong> &gt; <strong>Completed</strong> folder of your copy of the cloned or downloaded <a href="https://github.com/XamarinUniversity/XAM205/">course materials</a>.</p>
+
+
+        <div class="align-right">
+            <a href="../StartHere.html">Go Back</a>
+        </div>
+
+    </section>
+
+    <script src="./res/js/jquery.min.js"></script>
+    <script src="./res/js/jquery.imagemapster.min.js"></script>
+    <script src="./res/js/imagemap.js"></script>
+    <script src="./res/js/prettify.js"></script>
+    <script src="./res/js/script.js"></script>
+
+    <footer>Copyright (C) 2018 Xamarin Inc., Microsoft. All rights reserved.<br><a target="_blank" href="http://university.xamarin.com">Visit Xamarin University for more classes and content</a></footer>
+
+</body>
+</html>
